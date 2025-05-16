@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Waste Recycling Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #121212;
+        color: #f4f4f4;
+        overflow-x: hidden;
+    }
+    header {
+        background: #1f1f1f;
+        color: #4caf50;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        position: sticky;
+        top: 0;
+    }
+    h1 {
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.5em;
+    }
+    main {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    .blog-posts {
+        flex: 3;
+        margin-right: 20px;
+    }
+    .post {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .post:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+    h2 {
+        margin-top: 0;
+        color: #4caf50;
+    }
+    a {
+        text-decoration: none;
+        color: #4caf50;
+        font-weight: bold;
+    }
+    a:hover {
+        text-decoration: underline;
+        color: #81c784;
+    }
+    aside {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
+    aside:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    footer {
+        background: #1f1f1f;
+        color: #f4f4f4;
+        text-align: center;
+        padding: 10px 0;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    }
+    @media (max-width: 768px) {
+        main {
+            flex-direction: column;
+        }
+        .blog-posts {
+            margin-right: 0;
+        }
+    }
+    .user-submissions {
+        flex: 0 0 100%;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        margin-top: 20px;
+    }
+    .user-submissions h2 {
+        color: #4caf50;
+    }
+    .user-submissions form {
+        display: flex;
+        flex-direction: column;
+    }
+    .user-submissions label {
+        margin-top: 10px;
+    }
+    .user-submissions input, 
+    .user-submissions textarea {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #f4f4f4;
+    }
+    .user-submissions button {
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #4caf50;
+        color: #fff;
+        cursor: pointer;
+    }
+    .user-submissions button:hover {
+        background: #81c784;
+    }
+    #thank-you-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1f1f1f;
+    color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>E-Waste Recycling Blog</h1>
+        <p>Join us to explore the importance of recycling electronic waste and how you can make a difference.</p>
+    </header>
+    <main>
+        <section class="blog-posts">
+            <article class="post">
+                <h2>What is E-Waste?</h2>
+                <p>Electronic waste, commonly known as e-waste, consists of discarded electrical or electronic devices, such as computers, smartphones, and TVs. Proper disposal and recycling of e-waste is essential to mitigate its harmful impacts on the environment.</p>
+                <a href="https://en.wikipedia.org/wiki/Electronic_waste">Read more</a>
+            </article>
+            <article class="post">
+                <h2>Importance of Recycling E-Waste</h2>
+                <p>Recycling e-waste is crucial for the environment. It reduces pollution, conserves natural resources, and promotes sustainability. Learn how recycling helps in recovering precious metals and reduces the need for mining.</p>
+                <a href="https://www.scrapware.com/blog/five-reasons-why-e-waste-recycling-is-important/">Read more</a>
+            </article>
+            <article class="post">
+                <h2>How to Recycle E-Waste Properly</h2>
+                <p>Follow best practices for e-waste recycling. Find certified recyclers, understand what items can be recycled, and learn how to prepare devices for recycling. Together, we can ensure responsible disposal of electronic waste.</p>
+                <a href="https://sensoneo.com/how-to-recycle-e-waste/">Read more</a>
+            </article>
+        </section>
+        
+        <aside>
+            <h3>Recent News</h3>
+            <ul>
+                <li><a href="https://www.psa.gov.in/challenge-event/initiatives-e-waste-management/3738">New E-Waste Recycling Initiative Launched</a></li>
+                <li><a href="https://environment.rajasthan.gov.in/content/environment/en/rajasthan-state-pollution-control-board/information/WasteManagement/E-Waste_Management.html">Government Updates E-Waste Policies</a></li>
+                <li><a href="https://cioinsights.com/blog/the-latest-technological-innovations-in-e-waste-management">Technological Innovations in E-Waste Recycling</a></li>
+                <li><a href="https://www.re-source.au/blog/how-to-organise-a-community-e-waste-event">Community E-Waste Collection Events</a></li>
+            </ul>
+        </aside>
+        
+        <section class="user-submissions">
+            <h2>Share Your Thoughts</h2>
+            <p>We welcome contributions from our community! Share your thoughts about e-waste recycling.</p>
+            <form id="submission-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="name">
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="email">
+                
+                <label for="submission">Your Thoughts:</label>
+                <textarea id="submission" name="submission" rows="5" placeholder="share your thoughts"></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 E-Waste Blog. All rights reserved.</p>
+    </footer>
+    <div id="thank-you-modal" style="display: none;">
+        <div class="modal-content">
+            <p>Thank you for sharing your thoughts!</p>
+            <button id="close-modal">Close</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('submission-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop the default form submission
+            this.reset(); // Clear the form fields
+            document.getElementById('thank-you-modal').style.display = 'flex'; // Show the modal
+            document.getElementById('close-modal').focus(); // Focus on close button
+        });
+    
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('thank-you-modal').style.display = 'none'; // Hide the modal
+            document.getElementById('name').focus(); // Return focus to name input
+        });
+    
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('thank-you-modal').style.display === 'flex') {
+                document.getElementById('thank-you-modal').style.display = 'none'; // Hide on Escape key
+                document.getElementById('name').focus(); // Return focus to name input
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive E-Waste Lifecycle Timeline</title>
+    <!-- Google Fonts: Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* Container for calculator and timeline */
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 20px;
+        }
+
+        /* Calculator styling */
+        .calculator {
+            margin-bottom: 40px;
+        }
+
+        .calculator input {
+            padding: 10px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ff00;
+            color: #f4f4f4;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .calculator button {
+            padding: 10px 20px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .calculator button:hover {
+            background: #00cc00;
+        }
+
+        #eWasteChart {
+            max-width: 600px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* Timeline container */
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        /* Neon green progress line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #00ff00, transparent);
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            z-index: 0;
+        }
+
+        /* Individual stage styling */
+        .stage {
+            flex: 1;
+            max-width: 250px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            z-index: 1;
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+
+        /* Hover effect with 3D tilt */
+        .stage:hover {
+            transform: scale(1.05) rotateY(10deg);
+            box-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+        }
+
+        /* Icon styling */
+        .stage-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Heading styling */
+        .stage h3 {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        /* Description styling with fade effect */
+        .stage-description {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            margin-top: 10px;
+            padding: 10px;
+            background: #1f1f1f;
+            border-radius: 5px;
+            font-size: 0.9em;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+
+        /* Show description on hover or when clicked */
+        .stage:hover .stage-description, 
+        .stage.clicked .stage-description {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Tooltip styling */
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Show tooltip on hover */
+        .stage:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Focus styling for accessibility */
+        .stage:focus {
+            outline: 2px solid #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+                align-items: center;
+            }
+            .timeline::before {
+                display: none; /* Hide progress line on mobile */
+            }
+            .stage {
+                max-width: 100%;
+                width: 90%;
+            }
+            .calculator input, .calculator button {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>E-Waste Lifecycle Timeline</h1>
+
+        <!-- Device Count Calculator -->
+        <div class="calculator">
+            <label for="deviceCount">Enter Number of Devices You Own:</label>
+            <input type="number" id="deviceCount" min="1" value="1">
+            <button onclick="calculateEWaste()">Calculate Impact</button>
+            <canvas id="eWasteChart"></canvas>
+        </div>
+
+        <!-- Timeline section -->
+        <section class="timeline">
+            <!-- Production Stage -->
+            <div class="stage production" tabindex="0" role="button" aria-label="Learn about Production stage">
+                <div class="stage-icon">🏭</div>
+                <h3>Production</h3>
+                <div class="stage-description">
+                    <p>Global e-waste reached 62 Mt in 2022, up 82% since 2010, requiring extensive mining (e.g., 75 lbs per smartphone). Only 1% of rare earth demand is met by recycling.</p>
+                </div>
+                <div class="tooltip">Mining’s hidden cost</div>
+            </div>
+
+            <!-- Usage Stage -->
+            <div class="stage usage" tabindex="0" role="button" aria-label="Learn about Usage stage">
+                <div class="stage-icon">💡</div>
+                <h3>Usage</h3>
+                <div class="stage-description">
+                    <p>Extending device life by one year saves energy equal to powering a home for a week. Per capita e-waste is ~17.6 kg in Europe/Oceania (2022).</p>
+                </div>
+                <div class="tooltip">Energy in use</div>
+            </div>
+
+            <!-- Disposal Stage -->
+            <div class="stage disposal" tabindex="0" role="button" aria-label="Learn about Disposal stage">
+                <div class="stage-icon">🗑️</div>
+                <h3>Disposal</h3>
+                <div class="stage-description">
+                    <p>50 Mt of e-waste generated yearly, with only 20% recycled formally; much ends in landfills, causing pollution from lead and mercury.</p>
+                </div>
+                <div class="tooltip">Landfill impact</div>
+            </div>
+
+            <!-- Recycling Stage -->
+            <div class="stage recycling" tabindex="0" role="button" aria-label="Learn about Recycling stage">
+                <div class="stage-icon">♻️</div>
+                <h3>Recycling</h3>
+                <div class="stage-description">
+                    <p>Only 22.3% recycled in 2022, leaving US$62B unaccounted for. 60% by 2030 could yield US$38B in benefits.</p>
+                </div>
+                <div class="tooltip">Resource recovery</div>
+            </div>
+
+            <!-- Transportation Stage -->
+            <div class="stage transportation" tabindex="0" role="button" aria-label="Learn about Transportation stage">
+                <div class="stage-icon">🚚</div>
+                <h3>Transportation</h3>
+                <div class="stage-description">
+                    <p>Transporting e-waste can emit carbon equivalent to driving a car for 1,000 miles, contributing to emissions.</p>
+                </div>
+                <div class="tooltip">Carbon footprint</div>
+            </div>
+
+            <!-- Refurbishment Stage -->
+            <div class="stage refurbishment" tabindex="0" role="button" aria-label="Learn about Refurbishment stage">
+                <div class="stage-icon">🔧</div>
+                <h3>Refurbishment</h3>
+                <div class="stage-description">
+                    <p>Refurbishing extends device life, reducing e-waste; saves energy/resources equivalent to recycling millions of devices.</p>
+                </div>
+                <div class="tooltip">Second life</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Register ScrollTrigger with GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll-triggered animations for stages
+        gsap.utils.toArray('.stage').forEach((stage, i) => {
+            gsap.from(stage, {
+                scrollTrigger: {
+                    trigger: stage,
+                    start: 'top bottom',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                delay: i * 0.2
+            });
+        });
+
+        // Toggle description visibility on click
+        document.querySelectorAll('.stage').forEach(stage => {
+            stage.addEventListener('click', () => {
+                stage.classList.toggle('clicked');
+            });
+        });
+
+        // Device Count Calculator and Chart
+        let eWasteChart;
+        function calculateEWaste() {
+            const deviceCount = parseInt(document.getElementById('deviceCount').value) || 1;
+            const impactData = [
+                deviceCount * 75,  // Production: 75 lbs per device
+                deviceCount * 10,  // Usage: arbitrary energy units
+                deviceCount * 5,   // Disposal: waste units
+                deviceCount * -20, // Recycling: negative impact (benefit)
+                deviceCount * 2,   // Transportation: emission units
+                deviceCount * -15  // Refurbishment: negative impact (benefit)
+            ];
+
+            if (eWasteChart) eWasteChart.destroy();
+            const ctx = document.getElementById('eWasteChart').getContext('2d');
+            eWasteChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Production', 'Usage', 'Disposal', 'Recycling', 'Transportation', 'Refurbishment'],
+                    datasets: [{
+                        label: 'E-Waste Impact (Units)',
+                        data: impactData,
+                        backgroundColor: '#00ff00',
+                        borderColor: '#00cc00',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Impact Units', color: '#f4f4f4' } },
+                        x: { ticks: { color: '#f4f4f4' } }
+                    },
+                    plugins: { legend: { labels: { color: '#f4f4f4' } } }
+                }
+            });
+        }
+
+        // Initial chart render
+        calculateEWaste();
+
+        // Placeholder for real-time data fetch
+        async function fetchEwasteData() {
+            try {
+                // Replace with a real API endpoint when available
+                const response = await fetch('https://api.example.com/ewaste-stats');
+                const data = await response.json();
+                document.querySelector('.recycling .stage-description p').innerText = data.recyclingFact || "Only 22.3% recycled in 2022, leaving US$62B unaccounted for.";
+            } catch (error) {
+                console.error('Error fetching e-waste data:', error);
+            }
+        }
+        fetchEwasteData();
+    </script>
+</body>
+</html>

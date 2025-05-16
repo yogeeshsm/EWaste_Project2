@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Waste Calculator | Sustainable Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-green: #4dff4d;
+            --cyber-blue: #00f3ff;
+            --dark-bg: #0a0a1a;
+            --card-bg: rgba(0, 20, 30, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .calculator-container {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-green);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(77, 255, 77, 0.2);
+            margin-top: 2rem;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-green);
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(77, 255, 77, 0.5);
+        }
+
+        .device-input {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--cyber-blue);
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1 px solid var(--neon-green);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border: 1px solid var(--cyber-blue);
+            outline: none;
+            box-shadow: 0 0 5px var(--cyber-blue);
+        }
+
+        .calculate-btn {
+            background: var(--neon-green);
+            color: black;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0, 20, 30, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            display: none;
+        }
+
+        .reset-btn {
+            background: var(--cyber-blue);
+            color: black;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--cyber-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>E-Waste Calculator</h1>
+        <div class="device-input">
+            <label for="phones">Number of Phones:</label>
+            <input type="number" id="phones" placeholder="Enter number of phones" min="0">
+        </div>
+        <div class="device-input">
+            <label for="laptops">Number of Laptops:</label>
+            <input type="number" id="laptops" placeholder="Enter number of laptops" min="0">
+        </div>
+        <div class="device-input">
+            <label for="tablets">Number of Tablets:</label>
+            <input type="number" id="tablets" placeholder="Enter number of tablets" min="0">
+        </div>
+        <div class="device-input">
+            <label for="tvs">Number of TVs:</label>
+            <input type="number" id="tvs" placeholder="Enter number of TVs" min="0">
+        </div>
+        <button class="calculate-btn" onclick="calculateEwaste()">Calculate E-Waste</button>
+        <div class="result" id="result"></div>
+        <button class="reset-btn" onclick="resetCalculator()">Reset</button>
+    </div>
+
+    <script>
+        function calculateEwaste() {
+            const phoneWeight = 0.5; // kg
+            const laptopWeight = 4; // kg
+            const tabletWeight = 0.3; // kg
+            const tvWeight = 30; // kg
+
+            const phones = parseInt(document.getElementById('phones').value) || 0;
+            const laptops = parseInt(document.getElementById('laptops').value) || 0;
+            const tablets = parseInt(document.getElementById('tablets').value) || 0;
+            const tvs = parseInt(document.getElementById('tvs').value) || 0;
+
+            const totalEwaste = (phones * phoneWeight) + (laptops * laptopWeight) + (tablets * tabletWeight) + (tvs * tvWeight);
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Estimated E-Waste: ${totalEwaste.toFixed(2)} kg`;
+        }
+
+        function resetCalculator() {
+            document.getElementById('phones').value = '';
+            document.getElementById('laptops').value = '';
+            document.getElementById('tablets').value = '';
+            document.getElementById('tvs').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
