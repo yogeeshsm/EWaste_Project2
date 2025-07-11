@@ -8,13 +8,126 @@
     <meta name="author" content="The Growing Crisis of E-Waste Team">
     <title>About E-Waste | The Growing Crisis of E-Waste</title>
     <link rel="stylesheet" href="about.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: #141b23;
+            color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1a2332;
+            box-shadow: 0 2px 8px #0004;
+        }
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0.5rem 0;
+        }
+        .nav-menu li {
+            margin: 0 10px;
+        }
+        .nav-menu a {
+            color: #00ffe7;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            background: #00ffe7;
+            color: #181f2a;
+        }
+        .page-header {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+        .page-header h1 {
+            font-size: 2.4rem;
+            color: #00ffe7;
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px #00ffe7a0;
+        }
+        .content {
+            max-width: 820px;
+            margin: 2.5rem auto;
+            padding: 2rem 2.5rem;
+            background: rgba(24, 31, 42, 0.96);
+            border-radius: 14px;
+            box-shadow: 0 0 28px #00ffe7a0;
+        }
+        .content article {
+            margin-bottom: 2.2rem;
+        }
+        .content h2 {
+            color: #00ffe7;
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+        }
+        .content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .fact-box {
+            background: #18222e;
+            border-left: 4px solid #00ffe7;
+            margin: 2rem 0 1rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            color: #c1f7f7;
+        }
+        .call-to-action {
+            text-align: center;
+            margin: 2.5rem 0 1rem 0;
+        }
+        .btn {
+            background: #00ffe7;
+            color: #181f2a;
+            padding: 13px 32px;
+            border: none;
+            border-radius: 26px;
+            font-size: 1.12rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 0 14px #00ffe7a0;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #181f2a;
+            color: #00ffe7;
+        }
+        footer {
+            background: #181f2a;
+            color: #00ffe7;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            font-size: 0.97rem;
+        }
+        @media (max-width: 650px) {
+            .content {
+                padding: 1rem 0.5rem;
+            }
+            .page-header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav aria-label="Main navigation">
             <ul class="nav-menu">
                 <li><a href="home.html">Home</a></li>
-                <li><a href="about.html" class="active">About E-Waste</a></li>
+                <li><a href="about.html" class="active" aria-current="page">About E-Waste</a></li>
                 <li><a href="cause.html">Causes</a></li>
                 <li><a href="effects.html">Effects</a></li>
                 <li><a href="solution.html">Solutions</a></li>
@@ -34,18 +147,49 @@
         <section class="content">
             <article>
                 <h2>What is E-Waste?</h2>
-                <p>E-waste, or electronic waste, refers to discarded electrical or electronic devices such as smartphones, computers, refrigerators, and televisions. With rapid technological advancements, devices become outdated quickly, contributing to a global surge in e-waste.</p>
+                <p>
+                    <strong>E-waste</strong>, or electronic waste, refers to discarded electrical or electronic devices such as smartphones, computers, refrigerators, and televisions.
+                    Rapid technological advancement means devices become obsolete quickly, fueling a global surge in e-waste.
+                </p>
             </article>
 
             <article>
                 <h2>Why is E-Waste a Growing Crisis?</h2>
-                <p>Constant innovation and consumer demand result in frequent upgrades and increased disposal of electronic devices. Improper disposal releases toxic chemicals like lead and mercury into the environment. Most e-waste isn’t recycled properly, posing significant ecological and health risks.</p>
+                <ul>
+                    <li><strong>Frequent Upgrades:</strong> Consumer demand and innovation drive people to replace devices more often.</li>
+                    <li><strong>Improper Disposal:</strong> Many electronics are not disposed of correctly. E-waste in landfills releases hazardous substances like <strong>lead</strong> and <strong>mercury</strong> into the environment.</li>
+                    <li><strong>Low Recycling Rates:</strong> Globally, only a small fraction of e-waste is recycled properly, increasing ecological and health risks.</li>
+                </ul>
+                <div class="fact-box" aria-live="polite">
+                    <strong>Did you know?</strong> Over <b>50 million metric tons</b> of e-waste are generated each year globally, but only about <b>17%</b> is formally recycled.
+                </div>
             </article>
 
             <article>
                 <h2>Why Should You Care?</h2>
-                <p>E-waste contaminates soil and water, harms wildlife, and endangers human health. By raising awareness and promoting responsible recycling and reuse, we can minimize its negative impact and move toward a more sustainable world.</p>
+                <ul>
+                    <li><strong>Environmental Pollution:</strong> Toxic chemicals from e-waste contaminate soil and water, harming wildlife and ecosystems.</li>
+                    <li><strong>Health Risks:</strong> Exposure to hazardous materials in e-waste can cause respiratory issues, neurological damage, and other serious health problems, especially for communities near informal recycling sites.</li>
+                    <li><strong>Sustainability:</strong> Raising awareness and promoting responsible recycling and reuse helps reduce the negative impact of e-waste and supports a more sustainable future.</li>
+                </ul>
             </article>
+
+            <div class="fact-box" id="dynamic-fact">
+                <button class="btn" onclick="showFact()">Show a Quick Fact</button>
+                <span id="fact-text" style="margin-left:1rem;"></span>
+            </div>
+            <script>
+                const facts = [
+                    "E-waste is the fastest-growing waste stream in the world.",
+                    "Toxic e-waste chemicals can persist in the environment for decades.",
+                    "Children are especially vulnerable to e-waste toxins.",
+                    "Recycling one million laptops saves the energy equivalent to the electricity used by 3,500 US homes in a year."
+                ];
+                function showFact() {
+                    const idx = Math.floor(Math.random() * facts.length);
+                    document.getElementById('fact-text').textContent = facts[idx];
+                }
+            </script>
         </section>
 
         <section class="call-to-action">
