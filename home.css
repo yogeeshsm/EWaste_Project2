@@ -20,6 +20,9 @@ body {
     line-height: 1.6;
 }
 
+/* ===================
+      HEADER & NAV
+   =================== */
 header {
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
@@ -60,8 +63,18 @@ nav a:hover::after {
     width: 100%;
 }
 
+/* Accessibility: Focus State */
+nav a:focus-visible {
+    outline: 2.5px solid var(--accent-color);
+    background: rgba(44,218,157,0.15);
+    border-radius: 4px;
+}
+
+/* ===================
+        HERO
+   =================== */
 .hero {
-    background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7)),
+    background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.7)),
                 url('e-waste-background.jpg');
     background-size: cover;
     background-position: center;
@@ -72,32 +85,49 @@ nav a:hover::after {
     justify-content: center;
     flex-direction: column;
     padding: 2rem;
-    text-align : center;
+    text-align: center;
     animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Animated Gradient Heading Texts */
+.hero h1,
+.statistics h2,
+.call-to-action h2 {
+    background: var(--primary-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 3s linear infinite alternate;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 .hero h1 {
     font-size: 4rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 10px rgba(0, 255, 135, 0.7);
+    text-shadow: 0 0 10px rgba(0,255,135,0.7);
 }
 
 .hero p {
     font-size: 1.5rem;
     max-width: 800px;
     margin: 0 auto;
-    text-shadow: 0 0 10px rgba(0, 255, 135, 0.5);
+    text-shadow: 0 0 10px rgba(0,255,135,0.5);
 }
 
+/* ===================
+    STATISTICS SECTION
+   =================== */
 .statistics {
     background-color: #1e293b;
     padding: 3rem 1rem;
@@ -114,20 +144,33 @@ nav a:hover::after {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
     padding: 0;
+    list-style: none;
 }
 
+/* Enhanced Glassy Statistic Cards */
 .statistics li {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: rgba(30,41,59,0.45);
+    border-radius: 16px;
     padding: 2rem;
-    box-shadow: var(--neon-shadow);
-    transition: transform 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(44,218,157,.25), 
+                0 1.5px 4px rgba(15,23,42,0.10);
+    border: 1.5px solid rgba(44,218,157,0.10);
+    transition: 
+        transform 0.35s cubic-bezier(.42,1.65,.49,1),
+        box-shadow 0.3s;
+    backdrop-filter: blur(4.5px);
 }
 
 .statistics li:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 16px 40px 0 rgba(44,218,157,.38), 
+                0 0 0 6px #2cda9d30;
+    border-color: #2cda9d77;
 }
 
+/* ===================
+    CALL TO ACTION
+   =================== */
 .call-to-action {
     text-align: center;
     padding: 3rem 1rem;
@@ -139,17 +182,33 @@ nav a:hover::after {
     background: var(--accent-color);
     color: #fff;
     padding: 1rem 2rem;
-    text-decoration: none;
     font-size: 1.5rem;
     border-radius: 5px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 0 20px rgba(44,218,157,0.7), 
+                inset 0 0 10px #fff2;
+    cursor: pointer;
+    transition: 
+        transform 0.25s cubic-bezier(.55,1.45,.35,1),
+        box-shadow 0.3s cubic-bezier(.55,1.45,.35,1),
+        background 0.2s;
+    background-image: linear-gradient(135deg, #00ff87 0%, #2cda9d 50%, #60efff 100%);
+}
+
+.btn:focus-visible {
+    outline: 2.5px solid #fff;
+    box-shadow: 0 0 0 4px #2cda9d90;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 20px rgba(44, 218, 157, 0.5);
+    transform: translateY(-3px) scale(1.07) rotate(-.5deg);
+    background-image: linear-gradient(135deg, #60efff, #2cda9d, #00ff87);
+    box-shadow: 0 8px 32px 0 rgba(44,218,157,0.55), 0 0 0 4px #00ff8790;
 }
 
+/* ===================
+        FOOTER
+   =================== */
 footer {
     background-color: #0a2640;
     color: #fff;
@@ -158,6 +217,8 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-top: 2px solid #2cda9d33;
+    letter-spacing: 0.02em;
 }
 
 footer .social-icons {
@@ -165,16 +226,31 @@ footer .social-icons {
 }
 
 footer .social-icons a {
-    margin: 0 10px;
+    font-size: 1.35rem;
+    margin: 0 0.65em;
+    padding: 0.35em;
+    border-radius: 50%;
     color: #fff;
-    transition: color 0.3s ease;
+    border: 1px solid transparent;
+    transition: 
+        color 0.3s, 
+        border-color 0.2s, 
+        background 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
+footer .social-icons a:focus-visible,
 footer .social-icons a:hover {
     color: var(--accent-color);
+    border-color: var(--accent-color);
+    background: rgba(44,218,157,0.07);
 }
 
-/* Responsive Design */
+/* ===================
+    RESPONSIVE DESIGN
+   =================== */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
@@ -190,3 +266,11 @@ footer .social-icons a:hover {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 600px) {
+    .hero h1 { font-size: 1.55rem; }
+    .statistics { padding: 2rem 0.5rem; }
+    .call-to-action { border-radius: 9px; }
+    footer { padding: 1rem; }
+}
+
