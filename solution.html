@@ -1,24 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore sustainable and innovative solutions addressing the global e-waste crisis.">
-  <meta name="keywords" content="e-waste, recycling technology, digital traceability, circular economy, green electronics">
-  <meta name="author" content="The Growing Crisis of E-Waste Team">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore sustainable and innovative solutions addressing the global e-waste crisis." />
+  <meta name="keywords" content="e-waste, recycling technology, digital traceability, circular economy, green electronics" />
+  <meta name="author" content="The Growing Crisis of E-Waste Team" />
   <title>E-Waste Solutions | Sustainable Tech Revolution</title>
-  
-  <!-- Fonts and Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Exo+2:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="solution.css">
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Exo+2:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background-color: #0d1117;
+      color: #e6edf3;
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navigation */
+    header {
+      background: #161b22;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-menu li a {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+      color: #c9d1d9;
+      transition: background 0.3s;
+    }
+    .nav-menu li a:hover, .nav-menu li a.active {
+      background: #238636;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero-solutions {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+    }
+    .hero-solutions h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .cta-newsletter {
+      background: #238636;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .cta-newsletter:hover {
+      background: #2ea043;
+    }
+
+    /* Solutions Cards */
+    .content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    .solution-card {
+      background: #161b22;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .solution-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .solution-card h2 {
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #58a6ff;
+    }
+    .solution-card ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .stat {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #8b949e;
+    }
+    .btn-faq {
+      background: #21262d;
+      padding: 0.5rem 1rem;
+      border: none;
+      color: #c9d1d9;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .btn-faq:hover {
+      background: #30363d;
+    }
+    .faq-content {
+      margin-top: 0.5rem;
+      background: #0d1117;
+      padding: 0.5rem;
+      border-left: 3px solid #58a6ff;
+    }
+
+    /* Infographic */
+    .infographic {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .infographic img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #30363d;
+    }
+    th {
+      background: #21262d;
+    }
+
+    /* CTA Section */
+    .call-to-action {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .btn {
+      background: #238636;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      color: #fff;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #2ea043;
+    }
+
+    /* Footer */
+    footer {
+      background: #161b22;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #8b949e;
+      margin-top: 1rem;
+    }
+    .social-icons a {
+      margin: 0 0.5rem;
+      color: #c9d1d9;
+      font-size: 1.2rem;
+    }
+    .social-icons a:hover {
+      color: #58a6ff;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- HEADER NAVIGATION -->
-  <header class="cyber-header">
+  <header>
     <nav aria-label="Main Navigation">
       <ul class="nav-menu">
         <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
@@ -33,19 +206,14 @@
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
   <main>
-    <section class="hero-solutions" style="background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff;">
-      <div class="hologram-effect">
-        <h1 data-text="Sustainable Solutions">Sustainable Solutions</h1>
-        <p>Innovative strategies to combat the e-waste crisis.</p>
-        <button class="cta-newsletter" aria-label="Subscribe to our newsletter">Subscribe for Updates</button>
-      </div>
+    <section class="hero-solutions">
+      <h1>Sustainable Solutions</h1>
+      <p>Innovative strategies to combat the e-waste crisis.</p>
+      <button class="cta-newsletter" aria-label="Subscribe to our newsletter">Subscribe for Updates</button>
     </section>
 
-    <!-- SOLUTIONS CARDS -->
     <section class="content">
-      <!-- Card 1 -->
       <article class="solution-card">
         <h2><i class="fas fa-robot"></i> Advanced Recycling Technologies</h2>
         <ul>
@@ -56,7 +224,6 @@
         <p class="stat">Only 17.4% of global e-waste was formally recycled in 2023.</p>
       </article>
 
-      <!-- Card 2 -->
       <article class="solution-card">
         <h2><i class="fas fa-city"></i> Urban Mining & Circular Economy</h2>
         <ul>
@@ -66,7 +233,6 @@
         <p class="stat">Urban mining reduces traditional mining impact and creates local jobs.</p>
       </article>
 
-      <!-- Card 3 -->
       <article class="solution-card">
         <h2><i class="fas fa-balance-scale"></i> Regulatory & Compliance Advances</h2>
         <ul>
@@ -76,7 +242,6 @@
         <p class="stat">Stronger penalties encourage lawful disposal and recycling.</p>
       </article>
 
-      <!-- Card 4 with FAQ -->
       <article class="solution-card">
         <h2><i class="fas fa-users"></i> Public Awareness & Engagement</h2>
         <ul>
@@ -90,7 +255,6 @@
         </div>
       </article>
 
-      <!-- Card 5 -->
       <article class="solution-card">
         <h2><i class="fas fa-digital-tachograph"></i> Digital Platforms & Traceability</h2>
         <ul>
@@ -100,7 +264,6 @@
         <p class="stat">Digital traceability curbs illegal dumping and boosts recovery rates.</p>
       </article>
 
-      <!-- Card 6 -->
       <article class="solution-card">
         <h2><i class="fas fa-gem"></i> Critical Raw Materials Recovery</h2>
         <ul>
@@ -110,7 +273,6 @@
       </article>
     </section>
 
-    <!-- INFOGRAPHIC SECTION -->
     <section class="infographic" aria-labelledby="infographic-title">
       <h2 id="infographic-title" hidden>Infographic and Statistics</h2>
       <img src="ewaste-stats.png" alt="Infographic showing global e-waste statistics for 2023" />
@@ -138,13 +300,11 @@
       </table>
     </section>
 
-    <!-- CTA SECTION -->
     <section class="call-to-action">
       <a href="resource.html" class="btn">Explore More Resources <i class="fas fa-arrow-right"></i></a>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <p>&copy; 2023–2025 The Growing Crisis of E-Waste</p>
     <div class="social-icons" aria-label="Social media">
@@ -154,17 +314,13 @@
     </div>
   </footer>
 
-  <!-- FAQ TOGGLE SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const faqButtons = document.querySelectorAll('.btn-faq');
-      
-      faqButtons.forEach(button => {
+      document.querySelectorAll('.btn-faq').forEach(button => {
         button.addEventListener('click', () => {
           const contentId = button.getAttribute('aria-controls');
           const content = document.getElementById(contentId);
           const expanded = button.getAttribute('aria-expanded') === 'true';
-
           button.setAttribute('aria-expanded', !expanded);
           content.hidden = expanded;
         });
